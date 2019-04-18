@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry external="true" kind="lib" path="D:/数据内容/PHP/Pm/plugins/EconomyAPI_5.7.2.phar"/>
+	<buildpathentry external="true" kind="lib" path="D:/数据内容/PHP/Pm/PocketMine-MP3.7.phar"/>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+	<buildpathentry kind="src" path=""/>
+</buildpath>

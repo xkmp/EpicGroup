@@ -1,0 +1,26 @@
+name: EpicGroup
+main: EpicFX\EpicGroup
+version: 1.0.0
+api:
+- 1.0.0
+- 2.0.0
+- 3.0.0
+- 4.0.0
+load: POSTWORLD
+author: 
+- Winfxk
+- Anders
+description: 一个史诗级别的公会插件
+website: http://xiaokai.gotoip11.com
+commands:
+   公会:
+      description: 公会插件主命令
+      usage: /公会 hellp
+      permission: EpicGroup.Command.Main
+      aliases:
+      - gh
+      - EpicGroup
+permissions:
+   EpicGroup.Command.Main:
+      description: 公会插件主命令
+      default: true
