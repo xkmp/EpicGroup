@@ -44,6 +44,7 @@ class SmallTools
         }
         return false;
     }
+
     public static function getFontColor(string $ks, $k = "123456789abcdef", $kk = ""): string
     {
         if ($ks == "" or strlen($ks) < 1) {
@@ -111,6 +112,24 @@ class SmallTools
         }
         $msg = $msg . $k["seconds"] . "秒";
         return $msg;
+    }
+
+    /**
+     * 将秒数转换为时间差数组
+     *
+     * @param string|int|float $time
+     * @return string 带年月日的时间（x年x月x日 x时x分x秒）
+     */
+    public static function ComputationTimeToArray($time): array
+    {
+        $value = SmallTools::ComputationTime($time);
+        return array(
+            "年" => $value["years"],
+            "天" => $value["days"],
+            "时" => $value["days"],
+            "分" => $value["minutes"],
+            "秒" => $value["seconds"]
+        );
     }
 
     /**

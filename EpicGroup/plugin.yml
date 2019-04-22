@@ -1,25 +1,32 @@
+main: EpicFX\EpicGroup\EpicGroup
 name: EpicGroup
-main: EpicFX\EpicGroup
 version: 1.0.0
 api:
-- 1.0.0
-- 2.0.0
 - 3.0.0
 - 4.0.0
 load: POSTWORLD
-author: 
+authors:
 - Winfxk
 - Anders
+EpicFX:
+   Anders: 摸鱼
+   Winfxk: 帅逼凯
 description: 一个史诗级别的公会插件
-website: http://xiaokai.gotoip11.com
+depend: EconomyAPI
+softdepend: null
+loadbefore: EconomyAPI
+extensions: null
+prefix: EpicGroup
+website: https://github.com/xkmp/EpicGroup
 commands:
    公会:
       description: 公会插件主命令
-      usage: /公会 hellp
+      usage: /公会 help
       permission: EpicGroup.Command.Main
       aliases:
       - gh
-      - EpicGroup
+      - epicgroup
+      - eg
 permissions:
    EpicGroup.Command.Main:
       description: 公会插件主命令

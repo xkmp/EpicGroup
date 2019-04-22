@@ -1,10 +1,11 @@
 <?php
 namespace EpicFX\EpicGroup\Instrument\UI;
 
+use pocketmine\form\Form;
 use pocketmine\network\mcpe\protocol\ModalFormRequestPacket;
 use pocketmine\Player;
 
-abstract class RootUIAPI
+abstract class RootUIAPI implements Form
 {
 
     private $data = [];
