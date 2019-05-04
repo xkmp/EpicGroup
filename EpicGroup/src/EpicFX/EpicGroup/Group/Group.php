@@ -34,9 +34,8 @@ class Group
     {
         $this->plugin = $plugin;
         $this->GroupName = $GroupName;
-        if ($GroupName !== NULL) {
+        if ($GroupName !== NULL)
             $this->GroupConfig = Group::getGroupConfig($GroupName);
-        }
     }
 
     /**
@@ -153,7 +152,9 @@ class Group
         $player2 = \EpicFX\EpicGroup\Player\Player::getAllPlayer($player2);
         if ($player2 === NULL or $player1 === NULL)
             return FALSE;
-        if (! Group::isPlayer($player1) or ! Group::isPlayer($player2))
+        if (! \EpicFX\EpicGroup\Player\Player::isExistConfig($player2) or ! \EpicFX\EpicGroup\Player\Player::isExistConfig($player1))
+            return FALSE;
+        if (! Group::isPlayerInGroup($player1) or ! Group::isPlayerInGroup($player2))
             return FALSE;
         return (\EpicFX\EpicGroup\Player\Player::getPlayerConfig($player1)->get("公会") === \EpicFX\EpicGroup\Player\Player::getPlayerConfig($player2)->get("公会"));
     }
@@ -166,9 +167,21 @@ class Group
      */
     public static function UnknownToID(string $GroupName): string
     {
+        if ($EpicGroup = EpicGroup::$getInstance->GroupNameListConfig->get($GroupName, NULL) !== NULL)
+            return $EpicGroup;
         $GroupName = newGroup::BarcaToName($GroupName);
-        if (EpicGroup::$getInstance->GroupIDListConfig->get($GroupName, NULL) !== NULL)
+        if ($EpicGroup = EpicGroup::$getInstance->GroupIDListConfig->get($GroupName, NULL) !== NULL)
             return $GroupName;
         return EpicGroup::$getInstance->GroupNameListConfig->get($GroupName, NULL);
+    }
+
+    public function isBanPVPMsg(): bool
+    {
+        return $this->getConfig()->get("是否发送禁止PVP公告", FALSE);
+    }
+
+    public function getBanPVPMsg(): string
+    {
+        return $this->getConfig()->get("禁止PVP公告", Configs::getGroupDC()["禁止PVP公告"]);
     }
 }

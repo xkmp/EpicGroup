@@ -7,6 +7,7 @@ use pocketmine\command\CommandSender;
 use pocketmine\command\ConsoleCommandSender;
 use pocketmine\utils\Config;
 use EpicFX\EpicGroup\Configs\Configs;
+use EpicFX\EpicGroup\Group\Group;
 
 // 2019年4月21日 下午10:19:13
 class Player
@@ -47,10 +48,10 @@ class Player
     }
 
     /**
-     * 判断一个玩家是否存在配置文件
+     * 获取玩家公会币
      *
      * @param \pocketmine\Player|CommandSender|ConsoleCommandSender $player
-     * @return int 忘记公会币
+     * @return int 玩家公会币
      */
     public static function getPlayerGTC($player): int
     {
@@ -124,5 +125,44 @@ class Player
         if (! $player instanceof \pocketmine\Player and ! is_string($player) and ! $player instanceof CommandSender and ! is_string($name) and $name !== NULL)
             return null;
         return EpicGroup::$getInstance->getServer()->getPlayer($name);
+    }
+
+    /**
+     * 获取玩家所在ID
+     *
+     * @param \pocketmine\Player|CommandSender|ConsoleCommandSender $player
+     *            $player
+     * @return string 公会ID
+     */
+    public static function getGroupID($player): string
+    {}
+
+    /**
+     * 获取玩家所在公会名
+     *
+     * @param \pocketmine\Player|CommandSender|ConsoleCommandSender $player
+     *            $player
+     * @return string 公会名
+     */
+    public static function getGroupName($player): string
+    {}
+
+    /**
+     * 获取玩家公会
+     *
+     * @param \pocketmine\Player|CommandSender|ConsoleCommandSender $player
+     *            $player
+     * @return Group Group对象
+     */
+    public static function getGroup($player): Group
+    {
+        $player = Player::getAllPlayer($player);
+        if ($player === NULL)
+            return NULL;
+        if (! Player::isExistConfig($player))
+            return NULL;
+        if (! Group::isPlayerInGroup($player))
+            return NULL;
+        return new Group(EpicGroup::$getInstance, Player::getGroupID($player));
     }
 }

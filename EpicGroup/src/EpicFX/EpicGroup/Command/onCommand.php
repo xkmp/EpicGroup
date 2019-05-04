@@ -44,4 +44,16 @@ class onCommand
                 return FALSE;
         }
     }
+    public function getHelp(): array
+    {
+        return array(
+            "/红包 <红包金额> <红包Key> <红包个数> <Luck|Mean|Ladder> " => " 快捷发布一个红包，可直接省略后部内容，仅输入“/红包”可快捷发送",
+            "/pf add [item] [物品ID] [物品数量] [红包数量] <红包Key> <红包领取类型<Luck|Mean|Ladder>>" => "发布一个物品红包",
+            "/pf add [money] [红包金额] [红包数量] <红包Key> <红包领取类型<Luck|Mean|Ladder>>" => "发布一个金币红包",
+            "/pf show " => "显示红包功能主界面(游戏内有效)",
+            "/pf set" => "显示红包功能设置页面(游戏内且管理员有效)",
+            "/pf help" => "获取帮助界面",
+            "/pf my <ui>" => "查看个人信息(当第二个参数为ui时，将以UI的形式展示您的信息！)"
+        );
+    }
 }

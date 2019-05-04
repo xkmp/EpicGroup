@@ -1,6 +1,8 @@
 <?php
 namespace EpicFX\EpicGroup\Instrument;
 
+use pocketmine\utils\TextFormat;
+
 class SmallTools
 {
 
@@ -18,6 +20,32 @@ class SmallTools
         } else {
             return FALSE;
         }
+    }
+
+    /**
+     * 将数组帮助文本格式化为文本并且添加颜色
+     *
+     * @param array $helps
+     *            要格式化的数组
+     * @return string 序列化完毕的内容
+     */
+    public static function makeHelpToString(array $helps): string
+    {
+        $msg = "";
+        foreach ($helps as $cmd => $help) {
+            $cmd = TextFormat::GREEN . $cmd;
+            $cmd = str_replace("[", TextFormat::WHITE . "[" . TextFormat::AQUA, $cmd);
+            $cmd = str_replace("]", TextFormat::WHITE . "]" . TextFormat::GREEN, $cmd);
+            $cmd = str_replace("<", TextFormat::BLUE . "<" . TextFormat::YELLOW, $cmd);
+            $cmd = str_replace(">", TextFormat::BLUE . ">" . TextFormat::GREEN, $cmd);
+            $cmd = str_replace("|", TextFormat::LIGHT_PURPLE . "|" . TextFormat::YELLOW, $cmd);
+            $help = TextFormat::GOLD . $help;
+            $help = str_replace("(", TextFormat::WHITE . "(" . TextFormat::AQUA, $help);
+            $help = str_replace(")", TextFormat::WHITE . ")" . TextFormat::GOLD, $help);
+            $msg .= $cmd . TextFormat::LIGHT_PURPLE . " :" . TextFormat::GOLD . $help . "\n";
+        }
+        $msg = $msg . TextFormat::WHITE . "[]内的内容为必须输入的内容！<>内的内容则可选不输入。";
+        return $msg;
     }
 
     public static function is_serialized($data): bool

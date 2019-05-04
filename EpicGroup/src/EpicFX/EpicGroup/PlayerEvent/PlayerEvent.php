@@ -6,6 +6,11 @@ use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
 use EpicFX\EpicGroup\Configs\Configs;
 use pocketmine\utils\TextFormat;
+use pocketmine\event\player\PlayerQuitEvent;
+use pocketmine\event\entity\EntityDamageEvent;
+use pocketmine\event\entity\EntityDamageByEntityEvent;
+use EpicFX\EpicGroup\Group\Group;
+use pocketmine\Player;
 
 // 2019年4月18日 下午12:57:25
 class PlayerEvent implements Listener
@@ -17,6 +22,37 @@ class PlayerEvent implements Listener
     {
         $this->plugin = $plugin;
     }
+
+    /**
+     * 被人干了
+     *
+     * @param EntityDamageEvent $e
+     */
+    public function onEntityDamage(EntityDamageEvent $e)
+    {
+        $player = $e->getEntity();
+        if ($e instanceof EntityDamageByEntityEvent) {
+            $Bkill = $e->getDamager();
+            if ($Bkill === NULL or ! $Bkill instanceof Player)
+                return;
+        }
+        if (! \EpicFX\EpicGroup\Player\Player::isExistConfig($Bkill) || ! \EpicFX\EpicGroup\Player\Player::isExistConfig($player))
+            return;
+        if (Group::isPlayerAsPlayerToGroup($player, $Bkill) and ! $this->plugin->Config->get("公会伤害")) {
+            $e->setCancelled();
+            $group = \EpicFX\EpicGroup\Player\Player::getGroup($player);
+            if ($group->isBanPVPMsg())
+                $Bkill->sendMessage($group->getBanPVPMsg());
+        }
+    }
+
+    /**
+     * 吗哈皮滚蛋了
+     *
+     * @param PlayerQuitEvent $e
+     */
+    public function onPlayerQuit(PlayerQuitEvent $e)
+    {}
 
     public function onPlayerJoin(PlayerJoinEvent $e)
     {

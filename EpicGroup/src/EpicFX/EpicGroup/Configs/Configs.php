@@ -54,6 +54,8 @@ class Configs
             "库存" => EpicGroup::$getInstance->Config->get("默认最大库存"),
             "最大人数" => EpicGroup::$getInstance->Config->get("默认最大人数"),
             "公会伤害" => FALSE,
+            "是否发送禁止PVP公告" => TRUE,
+            "禁止PVP公告" => EpicGroup::$getInstance->Config->get("禁止PVP默认公告"),
             "入会缴费" => FALSE,
             "入会费用" => 1000,
             "接受申请" => TRUE,
@@ -89,6 +91,7 @@ class Configs
             "公会彩色字付费" => FALSE,
             "默认最大人数" => 10,
             "默认最大库存" => 10,
+            "禁止PVP默认公告" => "同工会误伤解除~",
             "公会彩色字付费币种" => "TGC",
             // The guild currency 公会币
             "公会彩色字付费方式" => 0,
